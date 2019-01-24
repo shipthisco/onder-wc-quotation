@@ -10,17 +10,16 @@
       <div class="q-card-body">
         <div class="container">
           <div class="row">
-            <div class="col-md-9 input-item">
+            <div class="col-md-9 input-item input-select-container">
               <label>What type of shipment are you shipping ?</label>
-              <select class="select" [(ngModel)]="quotation.shipment_type"
+              <select [(ngModel)]="quotation.shipment_type"
                       (ngModelChange)="loadTypeChanged($event)">
-                <option value="" disabled selected>Select a Shipment Type</option>
                 <option *ngFor="let load_type of load_types"
                         [value]="load_type.value">{{load_type.viewValue}}</option>
               </select>
 
             </div>
-            <div class="col-md-3 input-item"
+            <div class="col-md-3 input-item input-select-container"
                  *ngIf="quotation.shipment_type === 'sea_shipment_lcl' || quotation.shipment_type === 'air_shipment' ||quotation.shipment_type === 'air_shipment' ||quotation.shipment_type === 'land_shipment_ltl'">
               <label>How would you like to calculate the goods by?</label>
               <select [(ngModel)]="quotation.calculate_load_by">
@@ -41,7 +40,7 @@
             <quotation-load [(loads)]="quotation.ltls" [shipment_type]="quotation.shipment_type"></quotation-load>
           </div>
           <!--load row ends here-->
-          <div class="row" *ngIf="quotation.shipment_type">
+          <div class="row">
             <button class="add-load-button" (click)="addLoad()">
               + Add new Load
             </button>
@@ -51,7 +50,10 @@
       <div class="q-card-footer">
       </div>
     </div>
-    <button (click)="changeStep(2)" class="primary ma-0">Next Step</button>
+    <!--[disabled]="quotation.shipment_type"-->
+    <button (click)="changeStep(2)" [ngClass]="{'primary': quotation.shipment_type}" class="default-btn ma-0">Next
+      Step
+    </button>
   </div>
   <!--load detail ends here-->
 
@@ -65,9 +67,8 @@
       </div>
       <div class="q-card-body">
         <div class="container">
-
           <div class="row">
-            <div class="col-md-3 input-item">
+            <div class="col-md-3 input-item input-select-container">
               <label>Location Type</label>
               <select [(ngModel)]="quotation.origin.location_type">
                 <option *ngFor="let location_type of location_types"
@@ -80,7 +81,7 @@
               <input type="text" [(ngModel)]="quotation.origin.location"/>
             </div>
 
-            <div class="col-md-3 input-item">
+            <div class="col-md-3 input-item display-grid">
               <label>Ready Date</label>
               <input type="date" [(ngModel)]="quotation.origin.ready_date"/>
             </div>
@@ -111,7 +112,10 @@
         </div>
       </div>
     </div>
-    <button (click)="changeStep(3)" class="primary ma-0">Next Step</button>
+    <button (click)="changeStep(3)"
+            [ngClass]="{'primary': quotation.origin.location_type && quotation.origin.location }"
+            class="default-btn ma-0">Next Step
+    </button>
   </div>
   <!--origin detail ends here-->
 
@@ -127,7 +131,7 @@
         <div class="container">
 
           <div class="row">
-            <div class="col-md-3 input-item">
+            <div class="col-md-3 input-item input-select-container">
               <label>Location Type</label>
               <select [(ngModel)]="quotation.destination.location_type">
                 <option *ngFor="let location_type of location_types"
@@ -168,7 +172,10 @@
         </div>
       </div>
     </div>
-    <button (click)="changeStep(4)" class="primary ma-0">Next Step</button>
+    <button (click)="changeStep(4)"
+            [ngClass]="{'primary': quotation.destination.location_type && quotation.destination.location }"
+            class="default-btn ma-0">Next Step
+    </button>
 
   </div>
   <!--destination detail ends here-->
@@ -209,7 +216,7 @@
 
             <div class="col-md-4 input-item" *ngIf="quotation.additional_details.need_refrigeration">
               <label>temp_usererature</label>
-              <input type="text" [(ngModel)]="quotation.refrigeration.temp_usererature"/>
+              <input type="text" [(ngModel)]="quotation.refrigeration.temperature"/>
             </div>
 
           </div>
@@ -283,7 +290,7 @@
 
               <div class="col-md-8 col-md-offset-2">
                 <button class="primary" (click)="loginAndSend()">
-                  Login and Send Quotation
+                  Login and Get Quote
                 </button>
               </div>
             </div>
@@ -295,19 +302,38 @@
           <p>We just need your contact detail and we will get back to you with a quotation you would love to accept</p>
           <div class="user-form container">
             <div class="row">
+
+              <div class="col-md-8 col-md-offset-2 input-item">
+                <label>Name</label>
+                <input type="text" [(ngModel)]="quotation.guest_detail.name"/>
+              </div>
+
               <div class="col-md-8 col-md-offset-2 input-item">
                 <label>Email</label>
-                <input type="text" [(ngModel)]="temp_user.email"/>
+                <input type="text" [(ngModel)]="quotation.guest_detail.email"/>
+              </div>
+
+              <div class="col-md-8 col-md-offset-2 input-item">
+                <label>Organisation</label>
+                <input type="text" [(ngModel)]="quotation.guest_detail.organisation"/>
               </div>
 
               <div class="col-md-8 col-md-offset-2 input-item">
                 <label>Contact Number</label>
-                <input type="text" [(ngModel)]="temp_user.contact_number"/>
+                <input type="text" [(ngModel)]="quotation.guest_detail.contact_number"/>
+              </div>
+
+              <div class="col-md-8 col-md-offset-2 input-item">
+                <label class="checkbox-container">
+                  <input type="checkbox" class="m-10"
+                         [(ngModel)]="quotation.guest_detail.register_guest">
+                  <span>Register for next time?</span>
+                </label>
               </div>
 
               <div class="col-md-8 col-md-offset-2">
                 <button class="primary" (click)="guestSend()">
-                  Send
+                  Get Quote
                 </button>
               </div>
             </div>

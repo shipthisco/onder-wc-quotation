@@ -110,15 +110,19 @@ export class QuotationComponent implements OnInit {
     }
   }
 
+
   loginAndSend() {
     this.userMetaService.login(this.temp_user.email, this.temp_user.password)
       .then((user: any) => {
+        console.log('user');
+        console.log(user);
       });
   }
-
   guestSend() {
     this.quotation['is_guest'] = true;
-    this.quotation['quest_detail'] = this.temp_user;
-    this.quotationService.sendQuotationRequest(this.quotation);
+    this.quotationService.sendQuotationRequest(this.quotation)
+      .then((data: any) => {
+        alert('Your quote request has been sent Successfully ! We will get back to you soon');
+      });
   }
 }

@@ -22,6 +22,7 @@ export class UserMetaService {
 
   login(email: string, password: string) {
     // don't have the data yet
+    console.log(this.organisation_api_endpoint + this.base_api_path + 'login');
     return new Promise(resolve => {
       this.http
         .post(
@@ -32,7 +33,6 @@ export class UserMetaService {
           },
           {
             headers: new HttpHeaders()
-              .append('organisation', this.organisation_id)
               .append('usertype', 'customer')
           }
         )

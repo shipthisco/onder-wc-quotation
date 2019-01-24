@@ -12,8 +12,8 @@ export class QuotationService {
     localStorage.setItem('quotation_request', JSON.stringify(quotation_data));
     return new Promise(resolve => {
       this.http.post(
-        this.userMetaService.organisation_api_endpoint + 'api/v1/public/incollection/quotation',
-        quotation_data
+        this.userMetaService.organisation_api_endpoint + 'api/v1/public/incollection/third_party_quotation',
+        {'reqbody': quotation_data}
       ).subscribe((response_data: any) => {
           if (response_data.success) {
             resolve(response_data.data);

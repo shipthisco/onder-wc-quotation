@@ -7,7 +7,7 @@
     </div>
 
     <!--container type for fcl-->
-    <div class="col-md-2 input-item" *ngIf="shipment_type === 'sea_shipment_fcl'">
+    <div class="col-md-2 input-item input-select-container" *ngIf="shipment_type === 'sea_shipment_fcl'">
       <label>Container Type</label>
       <select [(ngModel)]="load.container_type">
         <option *ngFor="let container_type of container_types"
@@ -23,7 +23,7 @@
     <!--for fcl load ends here-->
 
 
-    <div class="col-md-2 input-item" *ngIf="shipment_type !== 'sea_shipment_fcl'">
+    <div class="col-md-2 input-item input-select-container" *ngIf="shipment_type !== 'sea_shipment_fcl'">
       <label>Package Type</label>
       <select [(ngModel)]="load.package_type">
         <option *ngFor="let package_type of package_types"
@@ -37,7 +37,7 @@
     </div>
 
 
-    <div class="col-md-1 input-item">
+    <div class="col-md-1 input-item input-select-container">
       <label>Weight Unit</label>
       <select [(ngModel)]="load.weight_unit">
         <option value="kg">KG</option>

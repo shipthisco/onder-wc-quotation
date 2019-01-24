@@ -89,7 +89,22 @@ select {
   /* background: #2c3e50; */
   /* background-image: none; */
 }
+.input-select-container {
+  position: relative;
+}
+.input-select-container::after {
+  content: '\25BD';
+  position: absolute;
+  right: 5px;
+  top: 25px;
+  font-size: 14px;
+  background: #e2e2e2;
+  padding: 5.4px 8px;
+  border-radius: 0 4px 4px 0;
+  border: 1px solid #dddddd;
+  color: #929090;
 
+}
 
 select {
   position: relative;
@@ -102,30 +117,8 @@ select {
   border-radius: 4px;
   cursor: pointer;
 }
-.select::after {
-  content: 'ads';
-  position: absolute;
-  background: red;
-  width: 10px;
-  height: 10px;
-}
 
 /* Arrow */
-.selectt::after {
-  content: '\25BC';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0 5px;
-  background: #f8f8f8;
-  pointer-events: none;
-  border: 1px solid #ddd;
-  color: #757575;
-  overflow: hidden;
-  line-height: 34px;
-  font-size: 14px;
-}
 
 /* Transition */
 .selectt:hover::after {
@@ -173,6 +166,10 @@ button {
   font-size: 14px;
 }
 
+[type="checkbox"].modal+div .card {
+  max-height: 90vh;
+}
+
 //override ends here
 
 .add-load-button {
@@ -189,10 +186,15 @@ button {
 
 
 //general
+.default-btn {
+  background: #e8e8e8;
+}
 .cursor-pointer {
   cursor: pointer;
 }
-
+.display-grid {
+  display: grid;
+}
 .input-item {
   text-align: left;
 
