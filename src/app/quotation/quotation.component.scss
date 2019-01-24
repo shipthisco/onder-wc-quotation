@@ -1,0 +1,241 @@
+:root {
+  --primary-color: #0093f5;
+  --primary-text-color: #fff;
+  --default-text-color: #585858;
+  --button-back-color: #0093f5;
+}
+
+.ma-0 {
+  margin: 0 !important;
+}
+
+.pa-0 {
+  padding: 0 !important;
+}
+
+.primary {
+  background: var(--primary-color) !important;
+}
+
+.q-card {
+  border: 1px solid #d8e5ef;
+  border-radius: 4px;
+  overflow: hidden;
+
+  margin-top: 40px;
+  margin-bottom: 10px;
+  background: #fff;
+
+  .q-card-header {
+    background: #fafbfc;
+    display: flex;
+    border-bottom: 1px solid #d8e5ef
+  }
+
+  .q-header-step-number {
+    background: var(--primary-color);
+    color: var(--primary-text-color);
+    padding: 5px 10px;
+  }
+
+  .q-header-step-content {
+    line-height: 2em;
+    padding-left: 15px;
+    font-weight: 500;
+    color: var(--default-text-color);
+  }
+
+  .q-card-body {
+
+    padding: 10px;
+  }
+
+  .q-card-footer {
+    border-top: 1px solid #d8e5ef;
+  }
+}
+
+select {
+  color: var(--default-text-color);
+}
+
+input:not([type]), [type="date"], [type="text"], [type="email"], [type="number"], [type="search"], [type="password"], [type="url"], [type="tel"], [type="checkbox"], [type="radio"], textarea, select {
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+input [type="date"], [type="text"], [type="email"], [type="number"], [type="search"], [type="password"], [type="url"], [type="tel"] {
+  width: 100%;
+}
+
+
+// select
+
+
+/* Reset Select */
+select {
+  width: 100%;
+  /* height: 100%; */
+  margin: 0;
+  /* padding: 0 0 0 .5em; */
+  /* color: #fff; */
+  /* cursor: pointer; */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  /* box-shadow: none; */
+  /* background: #2c3e50; */
+  /* background-image: none; */
+}
+
+
+select {
+  position: relative;
+  display: block;
+  /* width: 20em; */
+  /* height: 3em; */
+  /* line-height: 3; */
+  background: #f8f8f8;
+  overflow: hidden;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.select::after {
+  content: 'ads';
+  position: absolute;
+  background: red;
+  width: 10px;
+  height: 10px;
+}
+
+/* Arrow */
+.selectt::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 5px;
+  background: #f8f8f8;
+  pointer-events: none;
+  border: 1px solid #ddd;
+  color: #757575;
+  overflow: hidden;
+  line-height: 34px;
+  font-size: 14px;
+}
+
+/* Transition */
+.selectt:hover::after {
+  color: #f39c12;
+}
+
+.selectt::after {
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+
+.checkbox-container {
+  outline: none;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+
+  span {
+    font-size: 12px;
+    position: absolute;
+    width: max-content;
+    top: 0px;
+  }
+}
+
+
+//override
+
+input:not([type="button"]):not([type="submit"]):not([type="reset"]):hover, input:not([type="button"]):not([type="submit"]):not([type="reset"]):focus, textarea:hover, textarea:focus, select:hover, select:focus {
+  outline: none;
+}
+
+input[type="date"] {
+  margin: 3px;
+  background: #f8f8f8;
+  border: 1px solid #dddddd;
+}
+
+button {
+  padding: 4px 15px;
+  font-size: 14px;
+}
+
+//override ends here
+
+.add-load-button {
+  padding: 4px 12px;
+  background: none;
+  font-size: 10px;
+  background: #f9f9f9;
+  color: #585858;
+  cursor: pointer;
+  border: 1px solid #ececec;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+
+//general
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.input-item {
+  text-align: left;
+
+  label {
+    font-size: 10px;
+    font-weight: 600;
+    color: #737373;
+  }
+
+  input {
+    margin-top: 0 !important;
+  }
+}
+
+.delete-icon {
+  margin-top: 30px;
+  margin-left: 20px;
+}
+
+.additional-detail-checkbox {
+  padding-top: 15px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.confirmation-modal {
+  padding: 30px;
+}
+
+p {
+  font-size: 14px;
+  text-align: center;
+  color: var(--default-text-color);
+}
+
+h3 {
+  color: var(--default-text-color);
+  text-align: center;
+}
+
+.unfocused-btn {
+  background: #d4d4d4;
+}
+

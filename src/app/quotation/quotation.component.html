@@ -1,0 +1,321 @@
+<div style="padding: 100px; background-color: #f2f2f2;">
+
+  <!--load detail-->
+  <div>
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="q-header-step-number">1</div>
+        <div class="q-header-step-content">Are you here to ship something?</div>
+      </div>
+      <div class="q-card-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 input-item">
+              <label>What type of shipment are you shipping ?</label>
+              <select class="select" [(ngModel)]="quotation.shipment_type"
+                      (ngModelChange)="loadTypeChanged($event)">
+                <option value="" disabled selected>Select a Shipment Type</option>
+                <option *ngFor="let load_type of load_types"
+                        [value]="load_type.value">{{load_type.viewValue}}</option>
+              </select>
+
+            </div>
+            <div class="col-md-3 input-item"
+                 *ngIf="quotation.shipment_type === 'sea_shipment_lcl' || quotation.shipment_type === 'air_shipment' ||quotation.shipment_type === 'air_shipment' ||quotation.shipment_type === 'land_shipment_ltl'">
+              <label>How would you like to calculate the goods by?</label>
+              <select [(ngModel)]="quotation.calculate_load_by">
+                <option value="" disabled selected>Calculate Load By</option>
+                <option *ngFor="let item of calculate_load_by_items"
+                        [value]="item.value">{{item.viewValue}}</option>
+              </select>
+
+            </div>
+          </div>
+
+          <!--load row-->
+          <div *ngIf="quotation.shipment_type">
+            <quotation-load [(loads)]="quotation.fcls" [shipment_type]="quotation.shipment_type"></quotation-load>
+            <quotation-load [(loads)]="quotation.lcls" [shipment_type]="quotation.shipment_type"></quotation-load>
+            <quotation-load [(loads)]="quotation.details" [shipment_type]="quotation.shipment_type"></quotation-load>
+            <quotation-load [(loads)]="quotation.ftls" [shipment_type]="quotation.shipment_type"></quotation-load>
+            <quotation-load [(loads)]="quotation.ltls" [shipment_type]="quotation.shipment_type"></quotation-load>
+          </div>
+          <!--load row ends here-->
+          <div class="row" *ngIf="quotation.shipment_type">
+            <button class="add-load-button" (click)="addLoad()">
+              + Add new Load
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="q-card-footer">
+      </div>
+    </div>
+    <button (click)="changeStep(2)" class="primary ma-0">Next Step</button>
+  </div>
+  <!--load detail ends here-->
+
+
+  <!--origin detail-->
+  <div *ngIf="active_step > 1">
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="q-header-step-number">2</div>
+        <div class="q-header-step-content">Pickup goods from</div>
+      </div>
+      <div class="q-card-body">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-md-3 input-item">
+              <label>Location Type</label>
+              <select [(ngModel)]="quotation.origin.location_type">
+                <option *ngFor="let location_type of location_types"
+                        [value]="location_type.value">{{location_type.viewValue}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-6 input-item">
+              <label>Location</label>
+              <input type="text" [(ngModel)]="quotation.origin.location"/>
+            </div>
+
+            <div class="col-md-3 input-item">
+              <label>Ready Date</label>
+              <input type="date" [(ngModel)]="quotation.origin.ready_date"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <label class="checkbox-container">
+                <input type="checkbox" class="m-10"
+                       [(ngModel)]="quotation.origin.handle_warehouse">
+                <span>Handle Warehouse Charges?</span>
+              </label>
+            </div>
+            <div class="col-md-4">
+              <label class="checkbox-container">
+                <input type="checkbox" class="m-10"
+                       [(ngModel)]="quotation.origin.handle_port_charges">
+                <span>Handle Port Charges?</span>
+              </label>
+            </div>
+            <div class="col-md-4">
+              <label class="checkbox-container">
+                <input type="checkbox" [(ngModel)]="quotation.origin.handle_customs">
+                <span>Handle Customs Charges?</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button (click)="changeStep(3)" class="primary ma-0">Next Step</button>
+  </div>
+  <!--origin detail ends here-->
+
+
+  <!--destination detail-->
+  <div *ngIf="active_step > 2">
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="q-header-step-number">3</div>
+        <div class="q-header-step-content">Deliver goods to</div>
+      </div>
+      <div class="q-card-body">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-md-3 input-item">
+              <label>Location Type</label>
+              <select [(ngModel)]="quotation.destination.location_type">
+                <option *ngFor="let location_type of location_types"
+                        [value]="location_type.value">{{location_type.viewValue}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-9 input-item">
+              <label>Location</label>
+              <input type="text" [(ngModel)]="quotation.destination.location"/>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <label class="checkbox-container">
+                <input type="checkbox" class="m-10"
+                       [(ngModel)]="quotation.destination.handle_warehouse">
+                <span>Handle Warehouse Charges?</span>
+              </label>
+            </div>
+
+            <div class="col-md-4">
+              <label class="checkbox-container">
+                <input type="checkbox" class="m-10"
+                       [(ngModel)]="quotation.destination.handle_port_charges">
+                <span>Handle Port Charges?</span>
+              </label>
+            </div>
+            <div class="col-md-4">
+              <label class="checkbox-container">
+                <input type="checkbox" class="m-10"
+                       [(ngModel)]="quotation.destination.handle_customs">
+                <span>Handle Customs Charges?</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button (click)="changeStep(4)" class="primary ma-0">Next Step</button>
+
+  </div>
+  <!--destination detail ends here-->
+
+  <!--advanced detail-->
+  <div *ngIf="active_step > 3">
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="q-header-step-number">4</div>
+        <div class="q-header-step-content">Additional Details (optional)</div>
+      </div>
+      <div class="q-card-body">
+        <div class="container">
+
+
+          <div class="row">
+            <div class="col-md-4 additional-detail-checkbox">
+              <label class="checkbox-container">
+                <input type="checkbox" [(ngModel)]="quotation.additional_details.is_hazardous">
+                <span>Is Hazardous ?</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2 additional-detail-checkbox">
+              <label class="checkbox-container">
+                <input type="checkbox" [(ngModel)]="quotation.additional_details.need_refrigeration">
+                <span>Need Refrigeration ?</span>
+              </label>
+            </div>
+
+
+            <div class="col-md-2 input-item" *ngIf="quotation.additional_details.need_refrigeration">
+              <label>Unit</label>
+              <input type="text" [(ngModel)]="quotation.refrigeration.unit"/>
+            </div>
+
+            <div class="col-md-4 input-item" *ngIf="quotation.additional_details.need_refrigeration">
+              <label>temp_usererature</label>
+              <input type="text" [(ngModel)]="quotation.refrigeration.temp_usererature"/>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-2 additional-detail-checkbox">
+              <label class="checkbox-container">
+                <input type="checkbox" [(ngModel)]="quotation.additional_details.need_insurance">
+                <span>Need Insurance ?</span>
+              </label>
+            </div>
+
+            <div class="col-md-2 input-item" *ngIf="quotation.additional_details.need_insurance">
+              <label>Currency</label>
+              <input type="text" [(ngModel)]="quotation.good_value.currency"/>
+            </div>
+
+            <div class="col-md-4 input-item" *ngIf="quotation.additional_details.need_insurance">
+              <label>Amount</label>
+              <input type="text" [(ngModel)]="quotation.good_value.amount"/>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <button (click)="getQuote()" class="primary ma-0">Get Quote</button>
+
+  </div>
+  <!--advanced detail ends here-->
+</div>
+
+
+<!--Confirmation modal-->
+<div>
+  <div>
+    <label for="signin-modal-controller" id="signin-modal-trigger"></label>
+    <input type="checkbox" id="signin-modal-controller" class="modal">
+    <div>
+      <div class="card large confirmation-modal">
+        <label for="signin-modal-controller" class="modal-close"></label>
+
+        <div class="section text-center">
+          <h3>Do you have account with {{userMetaService.organisation_id | uppercase}}</h3>
+
+          <div style="text-align: center;">
+            <button class="unfocused-btn" [ngClass]="{'primary': has_account === 'yes'}" style="margin-right: 25px;"
+                    (click)="has_account='yes'">Yes
+            </button>
+            <button class="unfocused-btn" [ngClass]="{'primary': has_account === 'no'}" (click)="has_account='no'">No
+            </button>
+          </div>
+        </div>
+
+
+        <div class="section text-center" *ngIf="has_account === 'yes'">
+          <h3>That's awesome,</h3>
+          <p>Just log in with your {{userMetaService.organisation_id | uppercase}} and we will take care
+            of your shipment from here.</p>
+          <div class="user-form container">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2 input-item">
+                <label>Email</label>
+                <input type="text" [(ngModel)]="temp_user.email"/>
+              </div>
+
+              <div class="col-md-8 col-md-offset-2 input-item">
+                <label>Password</label>
+                <input type="password" [(ngModel)]="temp_user.password"/>
+              </div>
+
+              <div class="col-md-8 col-md-offset-2">
+                <button class="primary" (click)="loginAndSend()">
+                  Login and Send Quotation
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section text-center" *ngIf="has_account === 'no'">
+          <h3>No, Issues.</h3>
+          <p>We just need your contact detail and we will get back to you with a quotation you would love to accept</p>
+          <div class="user-form container">
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2 input-item">
+                <label>Email</label>
+                <input type="text" [(ngModel)]="temp_user.email"/>
+              </div>
+
+              <div class="col-md-8 col-md-offset-2 input-item">
+                <label>Contact Number</label>
+                <input type="text" [(ngModel)]="temp_user.contact_number"/>
+              </div>
+
+              <div class="col-md-8 col-md-offset-2">
+                <button class="primary" (click)="guestSend()">
+                  Send
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!--confirmation modal ends here-->
