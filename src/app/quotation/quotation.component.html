@@ -1,4 +1,4 @@
-<div style="padding: 100px; background-color: #f2f2f2;">
+<div [ngStyle]="{'padding.px': is_prod ? 0 : 100, 'background-color': is_prod ? 'none': '#f2f2f2'}">
 
   <!--load detail-->
   <div>
@@ -17,7 +17,6 @@
                 <option *ngFor="let load_type of load_types"
                         [value]="load_type.value">{{load_type.viewValue}}</option>
               </select>
-
             </div>
             <div class="col-md-3 input-item input-select-container"
                  *ngIf="quotation.shipment_type === 'sea_shipment_lcl' || quotation.shipment_type === 'air_shipment' ||quotation.shipment_type === 'air_shipment' ||quotation.shipment_type === 'land_shipment_ltl'">
@@ -51,15 +50,17 @@
       </div>
     </div>
     <!--[disabled]="quotation.shipment_type"-->
-    <button (click)="changeStep(2)" [ngClass]="{'primary': quotation.shipment_type}" class="default-btn ma-0">Next
-      Step
-    </button>
+    <!--auto next-->
+    <!--<button (click)="changeStep(2)" [ngClass]="{'primary': quotation.shipment_type}" class="default-btn ma-0">Next-->
+    <!--Step-->
+    <!--</button>-->
   </div>
   <!--load detail ends here-->
 
 
   <!--origin detail-->
-  <div *ngIf="active_step > 1">
+  <!--<div *ngIf="active_step > 1">-->
+  <div *ngIf="quotation.shipment_type">
     <div class="q-card">
       <div class="q-card-header">
         <div class="q-header-step-number">2</div>
@@ -112,16 +113,18 @@
         </div>
       </div>
     </div>
-    <button (click)="changeStep(3)"
-            [ngClass]="{'primary': quotation.origin.location_type && quotation.origin.location }"
-            class="default-btn ma-0">Next Step
-    </button>
+    <!--auto next step-->
+    <!--<button (click)="changeStep(3)"-->
+    <!--[ngClass]="{'primary': quotation.origin.location_type && quotation.origin.location }"-->
+    <!--class="default-btn ma-0">Next Step-->
+    <!--</button>-->
   </div>
   <!--origin detail ends here-->
 
 
   <!--destination detail-->
-  <div *ngIf="active_step > 2">
+  <!--<div *ngIf="active_step > 2">-->
+  <div *ngIf=" quotation.origin.location_type && quotation.origin.location">
     <div class="q-card">
       <div class="q-card-header">
         <div class="q-header-step-number">3</div>
@@ -172,16 +175,17 @@
         </div>
       </div>
     </div>
-    <button (click)="changeStep(4)"
-            [ngClass]="{'primary': quotation.destination.location_type && quotation.destination.location }"
-            class="default-btn ma-0">Next Step
-    </button>
+    <!--auto next step-->
+    <!--<button (click)="changeStep(4)"-->
+            <!--[ngClass]="{'primary': quotation.destination.location_type && quotation.destination.location }"-->
+            <!--class="default-btn ma-0">Next Step-->
+    <!--</button>-->
 
   </div>
   <!--destination detail ends here-->
 
   <!--advanced detail-->
-  <div *ngIf="active_step > 3">
+  <div *ngIf="quotation.destination.location_type && quotation.destination.location">
     <div class="q-card">
       <div class="q-card-header">
         <div class="q-header-step-number">4</div>
@@ -253,7 +257,7 @@
 <!--Confirmation modal-->
 <div>
   <div>
-    <label for="signin-modal-controller" id="signin-modal-trigger"></label>
+    <label for="signin-modal-controller" id="signin-modal-trigger" #modalTrigger></label>
     <input type="checkbox" id="signin-modal-controller" class="modal">
     <div>
       <div class="card large confirmation-modal">

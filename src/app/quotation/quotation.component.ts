@@ -1,20 +1,22 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {QuotationService} from '../services/quotation.service';
 import {Destination, Origin, Quotation, QuotationLoad} from './quotation.model';
 import {WebComponentService} from '../services/web-component.service';
 import {UserMetaService} from '../services/user.meta.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'quotation-component',
   templateUrl: './quotation.component.html',
-  styleUrls: ['./quotation.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./quotation.component.scss', './mini.scss'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class QuotationComponent implements OnInit {
 
 
   @Input() organisation_id;
   @Input() api_endpoint;
+  @ViewChild('modalTrigger') modalTrigger: ElementRef;
   calculate_load_by_items = [
     {viewValue: 'CBM -Cubic Meter ', value: 'cbm'},
     {viewValue: 'LWH - Length Width Height', value: 'lwh'},
@@ -48,6 +50,7 @@ export class QuotationComponent implements OnInit {
   temp_user: any = {};
   // already have account with this organisation or not
   has_account;
+  is_prod = environment.production;
 
   constructor(
     public quotationService: QuotationService,
@@ -105,8 +108,7 @@ export class QuotationComponent implements OnInit {
 
   getQuote() {
     if (!this.userMetaService.logged_in) {
-      const element = document.getElementById('signin-modal-controller');
-      element.click();
+      this.modalTrigger.nativeElement.click();
     }
   }
 
@@ -118,6 +120,7 @@ export class QuotationComponent implements OnInit {
         console.log(user);
       });
   }
+
   guestSend() {
     this.quotation['is_guest'] = true;
     this.quotationService.sendQuotationRequest(this.quotation)

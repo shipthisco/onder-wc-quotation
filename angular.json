@@ -27,8 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/mini.css/dist/mini-default.min.css"
+              "src/styles.scss"
             ],
             "scripts": [
               {

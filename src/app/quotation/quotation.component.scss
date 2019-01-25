@@ -1,9 +1,11 @@
-:root {
+:host {
   --primary-color: #0093f5;
   --primary-text-color: #fff;
   --default-text-color: #585858;
   --button-back-color: #0093f5;
 }
+
+$primary-color: #0093f5;
 
 .ma-0 {
   margin: 0 !important;
@@ -95,15 +97,14 @@ select {
 .input-select-container::after {
   content: '\25BD';
   position: absolute;
-  right: 5px;
-  top: 25px;
+  right: 1px;
+  top: 17px;
   font-size: 14px;
   background: #e2e2e2;
-  padding: 5.4px 8px;
+  padding: 2px 8px;
   border-radius: 0 4px 4px 0;
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
   color: #929090;
-
 }
 
 select {

@@ -36,10 +36,10 @@ export class AdditionalDetail {
 }
 
 export class GuestDetail {
-  name: string;
-  email: string;
+  name:string;
+  email:string;
   organisation: string;
-  contact_number: string;
+  contact_number:string;
   register_guest: boolean;
 }
 
