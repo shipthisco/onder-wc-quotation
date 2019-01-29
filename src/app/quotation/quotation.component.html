@@ -10,7 +10,7 @@
       <div class="q-card-body">
         <div class="container">
           <div class="row">
-            <div class="col-md-9 input-item input-select-container">
+            <div class="col-md-9 col-sm-9 input-item input-select-container">
               <label>What type of shipment are you shipping ?</label>
               <select [(ngModel)]="quotation.shipment_type"
                       (ngModelChange)="loadTypeChanged($event)">
@@ -18,7 +18,7 @@
                         [value]="load_type.value">{{load_type.viewValue}}</option>
               </select>
             </div>
-            <div class="col-md-3 input-item input-select-container"
+            <div class="col-md-3 col-sm-3 input-item input-select-container"
                  *ngIf="quotation.shipment_type === 'sea_shipment_lcl' || quotation.shipment_type === 'air_shipment' ||quotation.shipment_type === 'air_shipment' ||quotation.shipment_type === 'land_shipment_ltl'">
               <label>How would you like to calculate the goods by?</label>
               <select [(ngModel)]="quotation.calculate_load_by">
@@ -32,11 +32,11 @@
 
           <!--load row-->
           <div *ngIf="quotation.shipment_type">
-            <quotation-load [(loads)]="quotation.fcls" [shipment_type]="quotation.shipment_type"></quotation-load>
-            <quotation-load [(loads)]="quotation.lcls" [shipment_type]="quotation.shipment_type"></quotation-load>
-            <quotation-load [(loads)]="quotation.details" [shipment_type]="quotation.shipment_type"></quotation-load>
-            <quotation-load [(loads)]="quotation.ftls" [shipment_type]="quotation.shipment_type"></quotation-load>
-            <quotation-load [(loads)]="quotation.ltls" [shipment_type]="quotation.shipment_type"></quotation-load>
+            <quotation-load [(loads)]="quotation.fcls" [quotation]="quotation"></quotation-load>
+            <quotation-load [(loads)]="quotation.lcls" [quotation]="quotation"></quotation-load>
+            <quotation-load [(loads)]="quotation.details" [quotation]="quotation"></quotation-load>
+            <quotation-load [(loads)]="quotation.ftls" [quotation]="quotation"></quotation-load>
+            <quotation-load [(loads)]="quotation.ltls" [quotation]="quotation"></quotation-load>
           </div>
           <!--load row ends here-->
           <div class="row">
@@ -69,7 +69,7 @@
       <div class="q-card-body">
         <div class="container">
           <div class="row">
-            <div class="col-md-3 input-item input-select-container">
+            <div class="col-md-3 col-sm-3 input-item input-select-container">
               <label>Location Type</label>
               <select [(ngModel)]="quotation.origin.location_type">
                 <option *ngFor="let location_type of location_types"
@@ -77,33 +77,33 @@
               </select>
             </div>
 
-            <div class="col-md-6 input-item">
+            <div class="col-md-6 col-sm-6 input-item">
               <label>Location</label>
               <input type="text" [(ngModel)]="quotation.origin.location"/>
             </div>
 
-            <div class="col-md-3 input-item display-grid">
+            <div class="col-md-3 col-sm-3 input-item display-grid">
               <label>Ready Date</label>
               <input type="date" [(ngModel)]="quotation.origin.ready_date"/>
             </div>
           </div>
 
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-4">
               <label class="checkbox-container">
                 <input type="checkbox" class="m-10"
                        [(ngModel)]="quotation.origin.handle_warehouse">
                 <span>Handle Warehouse Charges?</span>
               </label>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-4">
               <label class="checkbox-container">
                 <input type="checkbox" class="m-10"
                        [(ngModel)]="quotation.origin.handle_port_charges">
                 <span>Handle Port Charges?</span>
               </label>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-4">
               <label class="checkbox-container">
                 <input type="checkbox" [(ngModel)]="quotation.origin.handle_customs">
                 <span>Handle Customs Charges?</span>
@@ -124,7 +124,7 @@
 
   <!--destination detail-->
   <!--<div *ngIf="active_step > 2">-->
-  <div *ngIf=" quotation.origin.location_type && quotation.origin.location">
+  <div *ngIf="quotation.shipment_type">
     <div class="q-card">
       <div class="q-card-header">
         <div class="q-header-step-number">3</div>
@@ -134,7 +134,7 @@
         <div class="container">
 
           <div class="row">
-            <div class="col-md-3 input-item input-select-container">
+            <div class="col-md-3 col-sm-3 input-item input-select-container">
               <label>Location Type</label>
               <select [(ngModel)]="quotation.destination.location_type">
                 <option *ngFor="let location_type of location_types"
@@ -142,14 +142,14 @@
               </select>
             </div>
 
-            <div class="col-md-9 input-item">
+            <div class="col-md-9 col-sm-9 input-item">
               <label>Location</label>
               <input type="text" [(ngModel)]="quotation.destination.location"/>
             </div>
           </div>
 
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-4">
               <label class="checkbox-container">
                 <input type="checkbox" class="m-10"
                        [(ngModel)]="quotation.destination.handle_warehouse">
@@ -157,14 +157,14 @@
               </label>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-4">
               <label class="checkbox-container">
                 <input type="checkbox" class="m-10"
                        [(ngModel)]="quotation.destination.handle_port_charges">
                 <span>Handle Port Charges?</span>
               </label>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-4">
               <label class="checkbox-container">
                 <input type="checkbox" class="m-10"
                        [(ngModel)]="quotation.destination.handle_customs">
@@ -185,7 +185,7 @@
   <!--destination detail ends here-->
 
   <!--advanced detail-->
-  <div *ngIf="quotation.destination.location_type && quotation.destination.location">
+  <div *ngIf="quotation.shipment_type">
     <div class="q-card">
       <div class="q-card-header">
         <div class="q-header-step-number">4</div>
@@ -196,7 +196,7 @@
 
 
           <div class="row">
-            <div class="col-md-4 additional-detail-checkbox">
+            <div class="col-md-4 col-sm-4 additional-detail-checkbox">
               <label class="checkbox-container">
                 <input type="checkbox" [(ngModel)]="quotation.additional_details.is_hazardous">
                 <span>Is Hazardous ?</span>
@@ -205,40 +205,42 @@
           </div>
 
           <div class="row">
-            <div class="col-md-2 additional-detail-checkbox">
+            <div class="col-md-2 col-sm-2 additional-detail-checkbox">
               <label class="checkbox-container">
                 <input type="checkbox" [(ngModel)]="quotation.additional_details.need_refrigeration">
                 <span>Need Refrigeration ?</span>
               </label>
             </div>
 
-
-            <div class="col-md-2 input-item" *ngIf="quotation.additional_details.need_refrigeration">
+            <div class="col-md-2 col-sm-2 input-item input-select-container" *ngIf="quotation.additional_details.need_refrigeration">
               <label>Unit</label>
-              <input type="text" [(ngModel)]="quotation.refrigeration.unit"/>
+              <select [(ngModel)]="quotation.refrigeration.unit">
+                <option *ngFor="let unit of refrigeration_unit_items"
+                        [value]="unit.value">{{unit.viewValue}}</option>
+              </select>
             </div>
 
-            <div class="col-md-4 input-item" *ngIf="quotation.additional_details.need_refrigeration">
-              <label>temp_usererature</label>
+            <div class="col-md-4 col-sm-4 input-item" *ngIf="quotation.additional_details.need_refrigeration">
+              <label>Temperature</label>
               <input type="text" [(ngModel)]="quotation.refrigeration.temperature"/>
             </div>
 
           </div>
 
           <div class="row">
-            <div class="col-md-2 additional-detail-checkbox">
+            <div class="col-md-2 col-sm-2 additional-detail-checkbox">
               <label class="checkbox-container">
                 <input type="checkbox" [(ngModel)]="quotation.additional_details.need_insurance">
                 <span>Need Insurance ?</span>
               </label>
             </div>
 
-            <div class="col-md-2 input-item" *ngIf="quotation.additional_details.need_insurance">
+            <div class="col-md-2 col-sm-2 input-item" *ngIf="quotation.additional_details.need_insurance">
               <label>Currency</label>
               <input type="text" [(ngModel)]="quotation.good_value.currency"/>
             </div>
 
-            <div class="col-md-4 input-item" *ngIf="quotation.additional_details.need_insurance">
+            <div class="col-md-4 col-sm-4 input-item" *ngIf="quotation.additional_details.need_insurance">
               <label>Amount</label>
               <input type="text" [(ngModel)]="quotation.good_value.amount"/>
             </div>
@@ -282,17 +284,17 @@
             of your shipment from here.</p>
           <div class="user-form container">
             <div class="row">
-              <div class="col-md-8 col-md-offset-2 input-item">
+              <div class="col-md-8 col-sm-8 col-md-offset-2 input-item">
                 <label>Email</label>
                 <input type="text" [(ngModel)]="temp_user.email"/>
               </div>
 
-              <div class="col-md-8 col-md-offset-2 input-item">
+              <div class="col-md-8 col-sm-8 col-md-offset-2 input-item">
                 <label>Password</label>
                 <input type="password" [(ngModel)]="temp_user.password"/>
               </div>
 
-              <div class="col-md-8 col-md-offset-2">
+              <div class="col-md-8 col-sm-8 col-md-offset-2">
                 <button class="primary" (click)="loginAndSend()">
                   Login and Get Quote
                 </button>
@@ -307,27 +309,27 @@
           <div class="user-form container">
             <div class="row">
 
-              <div class="col-md-8 col-md-offset-2 input-item">
+              <div class="col-md-8 col-sm-8 col-md-offset-2 input-item">
                 <label>Name</label>
                 <input type="text" [(ngModel)]="quotation.guest_detail.name"/>
               </div>
 
-              <div class="col-md-8 col-md-offset-2 input-item">
+              <div class="col-md-8 col-sm-8 col-md-offset-2 input-item">
                 <label>Email</label>
                 <input type="text" [(ngModel)]="quotation.guest_detail.email"/>
               </div>
 
-              <div class="col-md-8 col-md-offset-2 input-item">
+              <div class="col-md-8 col-sm-8 col-md-offset-2 input-item">
                 <label>Organisation</label>
                 <input type="text" [(ngModel)]="quotation.guest_detail.organisation"/>
               </div>
 
-              <div class="col-md-8 col-md-offset-2 input-item">
+              <div class="col-md-8 col-sm-8 col-md-offset-2 input-item">
                 <label>Contact Number</label>
                 <input type="text" [(ngModel)]="quotation.guest_detail.contact_number"/>
               </div>
 
-              <div class="col-md-8 col-md-offset-2 input-item">
+              <div class="col-md-8 col-sm-8 col-md-offset-2 input-item">
                 <label class="checkbox-container">
                   <input type="checkbox" class="m-10"
                          [(ngModel)]="quotation.guest_detail.register_guest">
@@ -335,7 +337,7 @@
                 </label>
               </div>
 
-              <div class="col-md-8 col-md-offset-2">
+              <div class="col-md-8 col-sm-8 col-md-offset-2">
                 <button class="primary" (click)="guestSend()">
                   Get Quote
                 </button>

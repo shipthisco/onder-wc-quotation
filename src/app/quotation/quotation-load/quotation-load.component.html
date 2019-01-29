@@ -7,15 +7,15 @@
     </div>
 
     <!--container type for fcl-->
-    <div class="col-md-2 input-item input-select-container" *ngIf="shipment_type === 'sea_shipment_fcl'">
+    <div class="col-md-2 input-item input-select-container" *ngIf="quotation.shipment_type === 'sea_shipment_fcl'">
       <label>Container Type</label>
       <select [(ngModel)]="load.container_type">
         <option *ngFor="let container_type of container_types"
-                [value]="container_type.value">{{container_type.viewValue}}</option>
+                [value]="container_type">{{container_type.name}}</option>
       </select>
     </div>
 
-    <div class="col-md-2 input-item" *ngIf="shipment_type === 'sea_shipment_fcl'">
+    <div class="col-md-2 input-item" *ngIf="quotation.shipment_type === 'sea_shipment_fcl'">
       <label>Container Count</label>
       <input type="text" [(ngModel)]="load.container_count"/>
     </div>
@@ -23,16 +23,16 @@
     <!--for fcl load ends here-->
 
 
-    <div class="col-md-2 input-item input-select-container" *ngIf="shipment_type !== 'sea_shipment_fcl'">
+    <div class="col-md-2 input-item input-select-container" *ngIf="quotation.shipment_type !== 'sea_shipment_fcl'">
       <label>Package Type</label>
       <select [(ngModel)]="load.package_type">
         <option *ngFor="let package_type of package_types"
-                [value]="package_type.value">{{package_type.viewValue}}</option>
+                [value]="package_type">{{package_type.name}}</option>
       </select>
     </div>
 
-    <div class="col-md-2 input-item" *ngIf="shipment_type !== 'sea_shipment_fcl'">
-      <label>Package Quantity</label>
+    <div class="col-md-1 input-item" *ngIf="quotation.shipment_type !== 'sea_shipment_fcl'">
+      <label>Quantity</label>
       <input type="text" [(ngModel)]="load.package_quantity"/>
     </div>
 
@@ -56,10 +56,32 @@
     </div>
 
 
-    <div class="col-md-1 input-item">
+    <div class="col-md-1 input-item" *ngIf="quotation.calculate_load_by === 'cbm'">
       <div>
         <label>CBM</label>
         <input type="text" [(ngModel)]="load.cbm"/>
+      </div>
+    </div>
+
+
+    <div class="col-md-3 input-item" *ngIf="quotation.calculate_load_by === 'lwh'">
+      <div>
+        <label>Length</label>
+        <input type="text" [(ngModel)]="load.length"/>
+      </div>
+    </div>
+
+    <div class="col-md-3 input-item" *ngIf="quotation.calculate_load_by === 'lwh'">
+      <div>
+        <label>Width</label>
+        <input type="text" [(ngModel)]="load.width"/>
+      </div>
+    </div>
+
+    <div class="col-md-3 input-item" *ngIf="quotation.calculate_load_by === 'lwh'">
+      <div>
+        <label>Height</label>
+        <input type="text" [(ngModel)]="load.height"/>
       </div>
     </div>
 

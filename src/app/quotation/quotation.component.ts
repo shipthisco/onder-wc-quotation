@@ -21,6 +21,11 @@ export class QuotationComponent implements OnInit {
     {viewValue: 'CBM -Cubic Meter ', value: 'cbm'},
     {viewValue: 'LWH - Length Width Height', value: 'lwh'},
   ];
+
+  refrigeration_unit_items = [
+    {viewValue: 'Degree Celsius', value: 'degree_celsius'},
+    {viewValue: 'Fahrenheit', value: 'fahrenheit'}
+  ];
   load_types = [
     {viewValue: 'Full Container Load Sea Shipment', value: 'sea_shipment_fcl'},
     {viewValue: 'Less than Container Load Sea Shipment', value: 'sea_shipment_lcl'},

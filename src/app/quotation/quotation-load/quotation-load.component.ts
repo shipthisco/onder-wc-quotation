@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {CONTAINER_TYPES, PACKAGE_TYPES} from '../../services/auto.complete.service';
 
 @Component({
   selector: 'quotation-load',
@@ -7,20 +8,11 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class QuotationLoadComponent {
   @Input() loads: Array<any>;
-  @Input() shipment_type;
+  @Input() quotation;
   @Output() loadsChange: EventEmitter<any> = new EventEmitter();
 
-  container_types = [
-    {viewValue: '20OT', value: '20ot'},
-    {viewValue: '20GP', value: '20gp'}
-  ];
-  package_types = [
-    {viewValue: 'BOXES', value: 'boxes'},
-    {viewValue: 'COLLI', value: 'colli'},
-    {viewValue: 'CRATE', value: 'crate'},
-    {viewValue: 'ROLLS', value: 'rolls'},
-    {viewValue: 'REELS', value: 'reels'}
-  ];
+  container_types = CONTAINER_TYPES;
+  package_types = PACKAGE_TYPES;
 
   constructor() {
   }
