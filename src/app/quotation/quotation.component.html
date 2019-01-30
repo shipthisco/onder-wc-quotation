@@ -1,59 +1,54 @@
 <div [ngStyle]="{'padding.px': is_prod ? 0 : 100, 'background-color': is_prod ? 'none': '#f2f2f2'}">
 
   <!--load detail-->
-  <div>
-    <div class="q-card">
-      <div class="q-card-header">
-        <div class="q-header-step-number">1</div>
-        <div class="q-header-step-content">Are you here to ship something?</div>
-      </div>
-      <div class="q-card-body">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-9 col-sm-9 input-item input-select-container">
-              <label>What type of shipment are you shipping ?</label>
-              <select [(ngModel)]="quotation.shipment_type"
-                      (ngModelChange)="loadTypeChanged($event)">
-                <option *ngFor="let load_type of load_types"
-                        [value]="load_type.value">{{load_type.viewValue}}</option>
-              </select>
-            </div>
-            <div class="col-md-3 col-sm-3 input-item input-select-container"
-                 *ngIf="quotation.shipment_type === 'sea_shipment_lcl' || quotation.shipment_type === 'air_shipment' ||quotation.shipment_type === 'air_shipment' ||quotation.shipment_type === 'land_shipment_ltl'">
-              <label>How would you like to calculate the goods by?</label>
-              <select [(ngModel)]="quotation.calculate_load_by">
-                <option value="" disabled selected>Calculate Load By</option>
-                <option *ngFor="let item of calculate_load_by_items"
-                        [value]="item.value">{{item.viewValue}}</option>
-              </select>
-
-            </div>
+  <div class="q-card">
+    <div class="q-card-header">
+      <div class="q-header-step-number">1</div>
+      <div class="q-header-step-content">Are you here to ship something?</div>
+    </div>
+    <div class="q-card-body">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 col-sm-9 input-item input-select-container">
+            <label>What type of shipment are you shipping ?</label>
+            <select [(ngModel)]="quotation.shipment_type"
+                    (ngModelChange)="loadTypeChanged($event)">
+              <option *ngFor="let load_type of load_types"
+                      [value]="load_type.value">{{load_type.viewValue}}
+              </option>
+            </select>
           </div>
+          <div class="col-md-3 col-sm-3 input-item input-select-container"
+               *ngIf="quotation.shipment_type === 'sea_shipment_lcl' || quotation.shipment_type === 'air_shipment' ||quotation.shipment_type === 'air_shipment' ||quotation.shipment_type === 'land_shipment_ltl'">
+            <label>How would you like to calculate the goods by?</label>
+            <select [(ngModel)]="quotation.calculate_load_by">
+              <option value="" disabled selected>Calculate Load By</option>
+              <option *ngFor="let item of calculate_load_by_items"
+                      [value]="item.value">{{item.viewValue}}
+              </option>
+            </select>
 
-          <!--load row-->
-          <div *ngIf="quotation.shipment_type">
-            <quotation-load [(loads)]="quotation.fcls" [quotation]="quotation"></quotation-load>
-            <quotation-load [(loads)]="quotation.lcls" [quotation]="quotation"></quotation-load>
-            <quotation-load [(loads)]="quotation.details" [quotation]="quotation"></quotation-load>
-            <quotation-load [(loads)]="quotation.ftls" [quotation]="quotation"></quotation-load>
-            <quotation-load [(loads)]="quotation.ltls" [quotation]="quotation"></quotation-load>
-          </div>
-          <!--load row ends here-->
-          <div class="row">
-            <button class="add-load-button" (click)="addLoad()">
-              + Add new Load
-            </button>
           </div>
         </div>
-      </div>
-      <div class="q-card-footer">
+
+        <!--load row-->
+        <div *ngIf="quotation.shipment_type">
+          <quotation-load [(loads)]="quotation.fcls" [quotation]="quotation"></quotation-load>
+          <quotation-load [(loads)]="quotation.lcls" [quotation]="quotation"></quotation-load>
+          <quotation-load [(loads)]="quotation.details" [quotation]="quotation"></quotation-load>
+          <quotation-load [(loads)]="quotation.ftls" [quotation]="quotation"></quotation-load>
+          <quotation-load [(loads)]="quotation.ltls" [quotation]="quotation"></quotation-load>
+        </div>
+        <!--load row ends here-->
+        <div class="row">
+          <button class="add-load-button" (click)="addLoad()">
+            + Add new Load
+          </button>
+        </div>
       </div>
     </div>
-    <!--[disabled]="quotation.shipment_type"-->
-    <!--auto next-->
-    <!--<button (click)="changeStep(2)" [ngClass]="{'primary': quotation.shipment_type}" class="default-btn ma-0">Next-->
-    <!--Step-->
-    <!--</button>-->
+    <div class="q-card-footer">
+    </div>
   </div>
   <!--load detail ends here-->
 
@@ -73,7 +68,8 @@
               <label>Location Type</label>
               <select [(ngModel)]="quotation.origin.location_type">
                 <option *ngFor="let location_type of location_types"
-                        [value]="location_type.value">{{location_type.viewValue}}</option>
+                        [value]="location_type.value">{{location_type.viewValue}}
+                </option>
               </select>
             </div>
 
@@ -132,13 +128,13 @@
       </div>
       <div class="q-card-body">
         <div class="container">
-
           <div class="row">
             <div class="col-md-3 col-sm-3 input-item input-select-container">
               <label>Location Type</label>
               <select [(ngModel)]="quotation.destination.location_type">
                 <option *ngFor="let location_type of location_types"
-                        [value]="location_type.value">{{location_type.viewValue}}</option>
+                        [value]="location_type.value">{{location_type.viewValue}}
+                </option>
               </select>
             </div>
 
@@ -177,8 +173,8 @@
     </div>
     <!--auto next step-->
     <!--<button (click)="changeStep(4)"-->
-            <!--[ngClass]="{'primary': quotation.destination.location_type && quotation.destination.location }"-->
-            <!--class="default-btn ma-0">Next Step-->
+    <!--[ngClass]="{'primary': quotation.destination.location_type && quotation.destination.location }"-->
+    <!--class="default-btn ma-0">Next Step-->
     <!--</button>-->
 
   </div>
@@ -205,18 +201,20 @@
           </div>
 
           <div class="row">
-            <div class="col-md-2 col-sm-2 additional-detail-checkbox">
+            <div class="col-md-12 col-sm-12 additional-detail-checkbox">
               <label class="checkbox-container">
                 <input type="checkbox" [(ngModel)]="quotation.additional_details.need_refrigeration">
                 <span>Need Refrigeration ?</span>
               </label>
             </div>
 
-            <div class="col-md-2 col-sm-2 input-item input-select-container" *ngIf="quotation.additional_details.need_refrigeration">
+            <div class="col-md-2 col-sm-2 input-item input-select-container"
+                 *ngIf="quotation.additional_details.need_refrigeration">
               <label>Unit</label>
               <select [(ngModel)]="quotation.refrigeration.unit">
                 <option *ngFor="let unit of refrigeration_unit_items"
-                        [value]="unit.value">{{unit.viewValue}}</option>
+                        [value]="unit.value">{{unit.viewValue}}
+                </option>
               </select>
             </div>
 
@@ -228,7 +226,7 @@
           </div>
 
           <div class="row">
-            <div class="col-md-2 col-sm-2 additional-detail-checkbox">
+            <div class="col-md-12 col-sm-12 additional-detail-checkbox">
               <label class="checkbox-container">
                 <input type="checkbox" [(ngModel)]="quotation.additional_details.need_insurance">
                 <span>Need Insurance ?</span>

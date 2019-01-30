@@ -27,11 +27,11 @@ export class QuotationComponent implements OnInit {
     {viewValue: 'Fahrenheit', value: 'fahrenheit'}
   ];
   load_types = [
-    {viewValue: 'Full Container Load Sea Shipment', value: 'sea_shipment_fcl'},
-    {viewValue: 'Less than Container Load Sea Shipment', value: 'sea_shipment_lcl'},
+    {viewValue: 'Full Container Load (FCL)', value: 'sea_shipment_fcl'},
+    {viewValue: 'Less than Container Load (LCL)', value: 'sea_shipment_lcl'},
     {viewValue: 'Air Shipment', value: 'air_shipment'},
-    {viewValue: 'Less than Truck Load', value: 'land_shipment_ltl'},
-    {viewValue: 'Full Truck Load Sea Shipment', value: 'land_shipment_ftl'}];
+    {viewValue: 'Less than Truck Load (LTL)', value: 'land_shipment_ltl'},
+    {viewValue: 'Full Truck Load (FTL)', value: 'land_shipment_ftl'}];
 
   load_model_mapper = {
     'sea_shipment_lcl': 'lcls',

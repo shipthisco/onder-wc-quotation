@@ -36,10 +36,10 @@ export class AdditionalDetail {
 }
 
 export class GuestDetail {
-  name:string;
-  email:string;
+  name: string;
+  email: string;
   organisation: string;
-  contact_number:string;
+  contact_number: string;
   register_guest: boolean;
 }
 
@@ -53,7 +53,7 @@ export class Quotation {
   details: Array<any> = [];
   ftls: Array<any> = [];
   ltls: Array<any> = [];
-  shipment_type: string;
+  shipment_type: string = 'sea_shipment_lcl';
   additional_details: AdditionalDetail = new AdditionalDetail();
   refrigeration: Refrigeration = new Refrigeration();
   good_value: GoodValue = new GoodValue();
