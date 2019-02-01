@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CONTAINER_TYPES, PACKAGE_TYPES} from '../../services/auto.complete.service';
+import {QuoteLoad} from '../quotation.model';
 
 @Component({
   selector: 'quotation-load',
@@ -7,7 +8,7 @@ import {CONTAINER_TYPES, PACKAGE_TYPES} from '../../services/auto.complete.servi
   styleUrls: ['./quotation-load.component.scss']
 })
 export class QuotationLoadComponent {
-  @Input() loads: Array<any>;
+  @Input() loads: Array<QuoteLoad>;
   @Input() quotation;
   @Output() loadsChange: EventEmitter<any> = new EventEmitter();
 
@@ -23,6 +24,19 @@ export class QuotationLoadComponent {
 
   removeLoad(index: number) {
     this.loads.splice(index, 1);
+    this.loadsChanged();
+  }
+
+  selectContainerType(index, container_type) {
+    this.loads[index].container_type = container_type;
+    console.log(this.loads);
+    this.loadsChanged();
+  }
+
+  selectPackageType(index, package_type) {
+    console.log('selection change');
+    this.loads[index].package_type = package_type;
+    console.log(package_type);
     this.loadsChanged();
   }
 }

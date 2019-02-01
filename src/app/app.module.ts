@@ -8,18 +8,23 @@ import {HttpClientModule} from '@angular/common/http';
 import {QuotationLoadComponent} from './quotation/quotation-load/quotation-load.component';
 import {WebComponentService} from './services/web-component.service';
 import {UserMetaService} from './services/user.meta.service';
+import {QuotationLocationComponent} from './quotation/quotation-location/quotation-location.component';
+import {LocationService} from './services/location.service';
+import {LocationSearchComponent} from './shared/location-search/location-search.component';
 
 @NgModule({
   declarations: [
     QuotationComponent,
-    QuotationLoadComponent
+    QuotationLoadComponent,
+    QuotationLocationComponent,
+    LocationSearchComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule
   ],
-  providers: [QuotationService, UserMetaService, WebComponentService],
+  providers: [QuotationService, UserMetaService, WebComponentService, LocationService],
   entryComponents: [QuotationComponent]
 })
 export class AppModule {

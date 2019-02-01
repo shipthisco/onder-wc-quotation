@@ -1,0 +1,19 @@
+<div class="field">
+  <label class="label">{{title}} *</label>
+  <div class="control">
+    <input class="input is-small" type="text" (keydown)="keyDown.next($event)"
+           [ngModel]="field.description"
+           (ngModelChange)="query = $event"
+           [placeholder]="title + 'Location'"
+           (focus)="show_results = true"
+    >
+  </div>
+
+  <div class="auto-complete-result" *ngIf="show_results">
+    <div *ngFor="let item of items" (click)="selectItem(item)" class="auto-complete-item">
+      {{item.description}}
+    </div>
+  </div>
+
+</div>
+

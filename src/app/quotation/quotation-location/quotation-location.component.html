@@ -1,0 +1,128 @@
+<div class="columns is-mobile is-desktop is-multiline" *ngIf="quotation.is_simplified">
+
+  <div class="column is-2">
+    <div class="field">
+      <label class="label">Ready Date</label>
+      <div class="control">
+        <input class="input is-small" type="date" [(ngModel)]="quotation.origin.ready_date"
+               placeholder="Ready Date">
+      </div>
+    </div>
+  </div>
+
+  <div class="column is-4">
+    <location-search [(field)]="quotation.origin.location" [title]="'Origin'"></location-search>
+  </div>
+  <div class="column is-5">
+    <location-search [(field)]="quotation.destination.location" [title]="'Destination'"></location-search>
+  </div>
+
+
+</div>
+
+<!--extended view-->
+
+<div *ngIf="!quotation.is_simplified">
+
+  <!--origin-->
+  <div>
+    <div class="location-type-header">Origin</div>
+    <div class="columns is-mobile is-desktop is-multiline">
+      <div class="column is-3">
+        <div class="field">
+          <label class="label">Location Type</label>
+          <div class="control">
+            <input class="input is-small" type="text" [(ngModel)]="quotation.origin.location_type"
+                   placeholder="Origin Location">
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-4">
+        <location-search [(field)]="quotation.origin.location" [title]="'Origin'"></location-search>
+      </div>
+
+      <div class="column is-3">
+        <div class="field">
+          <label class="label">Ready Date</label>
+          <div class="control">
+            <input class="input is-small" type="date" [(ngModel)]="quotation.origin.ready_date"
+                   placeholder="Ready Date">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-mobile is-desktop">
+      <div class="column is-3">
+        <label class="checkbox">
+          <input type="checkbox" [(ngModel)]="quotation.origin.handle_warehouse">
+          Handled Warehouse
+        </label>
+      </div>
+
+      <div class="column is-3">
+        <label class="checkbox">
+          <input type="checkbox" [(ngModel)]="quotation.origin.handle_customs">
+          Handled Customs ?
+        </label>
+      </div>
+
+      <div class="column is-3">
+        <label class="checkbox">
+          <input type="checkbox" [(ngModel)]="quotation.origin.handle_port_charges">
+          Handled Port Charges ?
+        </label>
+      </div>
+    </div>
+  </div>
+  <!--origin ends here-->
+
+
+  <!--destination-->
+  <div>
+    <div class="location-type-header">Destination</div>
+    <div class="columns is-mobile is-desktop is-multiline">
+      <div class="column is-3">
+        <div class="field">
+          <label class="label">Location Type</label>
+          <div class="control">
+            <input class="input is-small" type="text" [(ngModel)]="quotation.destination.location_type"
+                   placeholder="Destination Location">
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-4">
+        <location-search [(field)]="quotation.destination.location" [title]="'Destination'"></location-search>
+      </div>
+
+    </div>
+
+    <div class="columns is-mobile is-desktop">
+      <div class="column is-3">
+        <label class="checkbox">
+          <input type="checkbox" [(ngModel)]="quotation.destination.handle_warehouse">
+          Handled Warehouse
+        </label>
+      </div>
+
+      <div class="column is-3">
+        <label class="checkbox">
+          <input type="checkbox" [(ngModel)]="quotation.destination.handle_customs">
+          Handled Customs ?
+        </label>
+      </div>
+
+      <div class="column is-3">
+        <label class="checkbox">
+          <input type="checkbox" [(ngModel)]="quotation.destination.handle_port_charges">
+          Handled Port Charges ?
+        </label>
+      </div>
+    </div>
+  </div>
+  <!--destination ends here-->
+</div>
+
+

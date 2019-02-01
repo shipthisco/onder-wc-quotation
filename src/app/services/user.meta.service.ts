@@ -10,6 +10,8 @@ export class UserMetaService {
   logged_in = false;
   base_api_path = 'api/v1/customer/auth/';
   organisation_api_endpoint;
+  // customized user meta service
+  profiles = [];
 
   constructor(
     public http: HttpClient) {
@@ -22,7 +24,6 @@ export class UserMetaService {
 
   login(email: string, password: string) {
     // don't have the data yet
-    console.log(this.organisation_api_endpoint + this.base_api_path + 'login');
     return new Promise(resolve => {
       this.http
         .post(
@@ -39,6 +40,7 @@ export class UserMetaService {
         .subscribe((res: any) => {
           if (res.success) {
             this.data = this.processData(res.data.user);
+            this.profiles = res.data.profiles;
             this.onLoginSuccess(res.data);
             resolve(this.data);
           } else {
@@ -62,5 +64,18 @@ export class UserMetaService {
     localStorage.setItem('user', JSON.stringify(data));
     localStorage.setItem('authToken', data.auth_token);
     return data;
+  }
+
+  getCustomerReference() {
+    if (this.profiles && this.profiles[0]) {
+      const selected_profile = this.profiles[0];
+      return {
+        company: selected_profile.company,
+        primary_contact_person: selected_profile.primary_contact_person,
+        _cls_: selected_profile._cls_,
+        _id: selected_profile._id
+      };
+    }
+    return {};
   }
 }

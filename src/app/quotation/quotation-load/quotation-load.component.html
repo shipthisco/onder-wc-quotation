@@ -1,96 +1,12 @@
-<div class="load-container container pa-0">
-  <div class="row" *ngFor="let load of loads; let i=index">
-
-    <div class="col-md-3 input-item">
-      <label>Description of the load</label>
-      <input type="text" [(ngModel)]="load.description"/>
-    </div>
-
-    <!--container type for fcl-->
-    <div class="col-md-2 input-item input-select-container" *ngIf="quotation.shipment_type === 'sea_shipment_fcl'">
-      <label>Container Type</label>
-      <select [(ngModel)]="load.container_type">
-        <option *ngFor="let container_type of container_types"
-                [value]="container_type">{{container_type.name}}</option>
-      </select>
-    </div>
-
-    <div class="col-md-2 input-item" *ngIf="quotation.shipment_type === 'sea_shipment_fcl'">
-      <label>Container Count</label>
-      <input type="text" [(ngModel)]="load.container_count"/>
-    </div>
-
-    <!--for fcl load ends here-->
+<div class="columns load-container  pa-0" *ngFor="let load of loads; let i=index">
 
 
-    <div class="col-md-2 input-item input-select-container" *ngIf="quotation.shipment_type !== 'sea_shipment_fcl'">
-      <label>Package Type</label>
-      <select [(ngModel)]="load.package_type">
-        <option *ngFor="let package_type of package_types"
-                [value]="package_type">{{package_type.name}}</option>
-      </select>
-    </div>
-
-    <div class="col-md-1 input-item" *ngIf="quotation.shipment_type !== 'sea_shipment_fcl'">
-      <label>Quantity</label>
-      <input type="text" [(ngModel)]="load.package_quantity"/>
-    </div>
-
-
-    <div class="col-md-1 input-item input-select-container">
-      <label>Weight Unit</label>
-      <select [(ngModel)]="load.weight_unit">
-        <option value="kg">KG</option>
-        <option value="lb">LB</option>
-      </select>
-    </div>
-
-    <div class="col-md-1 input-item">
-      <label> Gross Weight</label>
-      <input type="text" [(ngModel)]="load.gross_weight"/>
-    </div>
-
-    <div class="col-md-1 input-item">
-      <label>Net Weight</label>
-      <input type="text" [(ngModel)]="load.net_weight"/>
-    </div>
-
-
-    <div class="col-md-1 input-item" *ngIf="quotation.calculate_load_by === 'cbm'">
-      <div>
-        <label>CBM</label>
-        <input type="text" [(ngModel)]="load.cbm"/>
-      </div>
-    </div>
-
-
-    <div class="col-md-3 input-item" *ngIf="quotation.calculate_load_by === 'lwh'">
-      <div>
-        <label>Length</label>
-        <input type="text" [(ngModel)]="load.length"/>
-      </div>
-    </div>
-
-    <div class="col-md-3 input-item" *ngIf="quotation.calculate_load_by === 'lwh'">
-      <div>
-        <label>Width</label>
-        <input type="text" [(ngModel)]="load.width"/>
-      </div>
-    </div>
-
-    <div class="col-md-3 input-item" *ngIf="quotation.calculate_load_by === 'lwh'">
-      <div>
-        <label>Height</label>
-        <input type="text" [(ngModel)]="load.height"/>
-      </div>
-    </div>
-
-    <div class="col-md-1 input-item cursor-pointer" (click)="removeLoad(i)">
-      <div class="delete-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-             version="1.1" id="Capa_1" x="0px" y="0px" width="20px" height="20px"
-             viewBox="0 0 482.428 482.429" style="enable-background:new 0 0 482.428 482.429;"
-             xml:space="preserve">
+  <div class="delete-button cursor-pointer">
+    <button class="button is-small" (click)="removeLoad(i)">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+           version="1.1" id="Capa_1" x="0px" y="0px" width="20px" height="20px"
+           viewBox="0 0 482.428 482.429" style="enable-background:new 0 0 482.428 482.429;"
+           xml:space="preserve">
                                                         <g>
                                                             <g>
                                                                 <path
@@ -103,27 +19,131 @@
                                                                 d="M311.284,422.863c7.217,0,13.068-5.853,13.068-13.068V262.641c0-7.216-5.852-13.07-13.068-13.07 c-7.219,0-13.07,5.854-13.07,13.07v147.154C298.213,417.012,304.067,422.863,311.284,422.863z"></path>
                                                             </g>
                                                         </g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
                                                     </svg>
+    </button>
+  </div>
+
+  <div class="column is-3" *ngIf="quotation.shipment_type === 'sea_shipment_fcl'">
+    <div class="field">
+      <label class="label">Container Type</label>
+      <div class="control is-expanded">
+        <div class="select is-fullwidth is-small">
+          <select [(ngModel)]="load.container_type">
+            <option *ngFor="let container_type of container_types"
+                    [ngValue]="container_type">{{container_type.name}}</option>
+          </select>
+        </div>
       </div>
     </div>
-
-    <hr
-      style="border-width: 1px 0px 0px; border-top-style: solid; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-top-color: rgb(197, 217, 232); border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; margin: 10px -16px; padding: 0px;">
-
   </div>
+
+  <div class="column is-1" *ngIf="quotation.shipment_type === 'sea_shipment_fcl'">
+    <div class="field">
+      <label class="label">How many?</label>
+      <div class="control">
+        <input class="input is-small" type="number" [(ngModel)]="load.container_count">
+      </div>
+    </div>
+  </div>
+
+  <div class="column is-3" *ngIf="quotation.shipment_type !== 'sea_shipment_fcl'">
+    <div class="field">
+      <label class="label">Package Type</label>
+      <div class="control is-expanded">
+        <div class="select is-fullwidth is-small">
+          <select [(ngModel)]="load.package_type">
+            <option *ngFor="let package_type of package_types"
+                    [ngValue]="package_type">{{package_type.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="column is-1" *ngIf="quotation.shipment_type !== 'sea_shipment_fcl'">
+    <div class="field">
+      <label class="label">How many?</label>
+      <div class="control">
+        <input class="input is-small" type="number" [(ngModel)]="load.package_quantity">
+      </div>
+    </div>
+  </div>
+
+  <div class="column is-2">
+    <label class="label">Weight</label>
+    <div class="field has-addons">
+
+      <p class="control is-expanded">
+        <input class="input is-small" type="number" [(ngModel)]="load.gross_weight" placeholder="Weight">
+      </p>
+      <p class="control">
+    <span class="select is-small">
+      <select class="addon-select" [(ngModel)]="load.weight_unit">
+        <option value="kg">KG</option>
+        <option value="lb">LB</option>
+      </select>
+    </span>
+      </p>
+    </div>
+  </div>
+
+
+  <div class="column is-3" *ngIf="quotation.calculate_load_by === 'lwh'">
+    <label class="label">Volume</label>
+    <div class="field has-addons">
+
+      <p class="control is-expanded">
+        <input class="input is-small" type="text" [(ngModel)]="load.length" placeholder="Length">
+      </p>
+      <p class="control is-expanded">
+        <input class="input is-small" type="text" [(ngModel)]="load.width" placeholder="Width">
+      </p>
+      <p class="control is-expanded">
+        <input class="input is-small" type="text" [(ngModel)]="load.height" placeholder="Height">
+      </p>
+
+      <p class="control">
+    <span class="select is-small">
+      <select class="addon-select" [(ngModel)]="load.length_unit">
+        <option value="cm">CM</option>
+        <option value="in">IN</option>
+      </select>
+    </span>
+      </p>
+    </div>
+  </div>
+
+  <div class="column is-2" *ngIf="quotation.calculate_load_by === 'cbm'">
+    <label class="label">CBM</label>
+    <div class="field has-addons">
+
+      <p class="control is-expanded">
+        <input class="input is-small" type="text" [(ngModel)]="load.cbm" placeholder="CBM">
+      </p>
+      <p class="control">
+    <span class="select is-small">
+      <select class="addon-select" [(ngModel)]="load.length_unit">
+        <option value="cm">CM</option>
+        <option value="in">IN</option>
+      </select>
+    </span>
+      </p>
+    </div>
+  </div>
+
 </div>

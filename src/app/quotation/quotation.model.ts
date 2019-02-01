@@ -33,6 +33,7 @@ export class AdditionalDetail {
   is_hazardous: boolean;
   need_refrigeration: boolean;
   need_insurance: boolean;
+  remark;
 }
 
 export class GuestDetail {
@@ -43,17 +44,31 @@ export class GuestDetail {
   register_guest: boolean;
 }
 
+export class QuoteLoad {
+  package_type: any = {};
+  container_type: any = {};
+
+  cbm: any;
+  length: any;
+  width: any;
+  height: any;
+  weight: any;
+  weight_unit: any = 'kg';
+  length_unit: any = 'cm';
+}
+
 export class Quotation {
   origin: Origin = new Origin();
-  calculate_load_by: string;
+  is_simplified = true;
+  calculate_load_by = 'lwh';
   customer: any;
   destination: any;
-  fcls: Array<any> = [];
-  lcls: Array<any> = [];
-  details: Array<any> = [];
-  ftls: Array<any> = [];
-  ltls: Array<any> = [];
-  shipment_type: string = 'sea_shipment_lcl';
+  fcls: Array<QuoteLoad> = [];
+  lcls: Array<QuoteLoad> = [];
+  details: Array<QuoteLoad> = [];
+  ftls: Array<QuoteLoad> = [];
+  ltls: Array<QuoteLoad> = [];
+  shipment_type: string;
   additional_details: AdditionalDetail = new AdditionalDetail();
   refrigeration: Refrigeration = new Refrigeration();
   good_value: GoodValue = new GoodValue();

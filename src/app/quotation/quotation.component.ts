@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {QuotationService} from '../services/quotation.service';
-import {Destination, Origin, Quotation, QuotationLoad} from './quotation.model';
+import {Destination, Origin, Quotation, QuotationLoad, QuoteLoad} from './quotation.model';
 import {WebComponentService} from '../services/web-component.service';
 import {UserMetaService} from '../services/user.meta.service';
 import {environment} from '../../environments/environment';
@@ -8,7 +8,7 @@ import {environment} from '../../environments/environment';
 @Component({
   selector: 'quotation-component',
   templateUrl: './quotation.component.html',
-  styleUrls: ['./quotation.component.scss', './mini.scss'],
+  styleUrls: ['./quotation.component.scss', '../../assets/bulma.sass'],
   encapsulation: ViewEncapsulation.ShadowDom
 })
 export class QuotationComponent implements OnInit {
@@ -17,14 +17,17 @@ export class QuotationComponent implements OnInit {
   @Input() organisation_id;
   @Input() api_endpoint;
   @ViewChild('modalTrigger') modalTrigger: ElementRef;
-  calculate_load_by_items = [
-    {viewValue: 'CBM -Cubic Meter ', value: 'cbm'},
-    {viewValue: 'LWH - Length Width Height', value: 'lwh'},
-  ];
-
+  alert = {show_alert: false, message: '', alert_type: ''};
   refrigeration_unit_items = [
     {viewValue: 'Degree Celsius', value: 'degree_celsius'},
     {viewValue: 'Fahrenheit', value: 'fahrenheit'}
+  ];
+
+  currencies = [
+    {viewValue: 'INR', value: 'inr'},
+    {viewValue: 'USD', value: 'usd'},
+    {viewValue: 'SAR', value: 'sar'}
+
   ];
   load_types = [
     {viewValue: 'Full Container Load (FCL)', value: 'sea_shipment_fcl'},
@@ -41,35 +44,26 @@ export class QuotationComponent implements OnInit {
     'air_shipment': 'details'
   };
 
-  location_types = [
-    {viewValue: 'Residential', value: 'residential'},
-    {viewValue: 'Business (Need lift gate)', value: 'business_need_lift_date'},
-    {viewValue: 'Port/Airport', value: 'port_airpoort'},
-    {viewValue: 'Factory/Warehouse', value: 'factory_warehouse'}
-  ];
-
-  active_step = 1;
   quotation: Quotation = new Quotation();
-  is_guest_user;
   // user before login contact detail email
   temp_user: any = {};
   // already have account with this organisation or not
   has_account;
   is_prod = environment.production;
+  modal_activated = false;
 
   constructor(
     public quotationService: QuotationService,
     public webComponentService: WebComponentService,
     public userMetaService: UserMetaService
   ) {
-
   }
 
   ngOnInit() {
     if (!this.organisation_id) {
-      alert('You need to provide organisation id in order to properly get this component working');
+      this.showAlert('You need to provide organisation id in order to properly get this component working', 'error');
     } else {
-      this.webComponentService.setComponentRequiredDetails(this.organisation_id, this.api_endpoint);
+      this.userMetaService.setOrganisationDetail(this.organisation_id, this.api_endpoint);
     }
 
     if (!this.quotation.origin) {
@@ -80,19 +74,11 @@ export class QuotationComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-
-    this.quotationService.sendQuotationRequest({})
-      .then((result_data) => {
-        console.log(result_data);
-      });
-  }
-
   addLoad() {
     if (!this.quotation[this.load_model_mapper[this.quotation.shipment_type]]) {
       this.quotation[this.load_model_mapper[this.quotation.shipment_type]] = [];
     }
-    this.quotation[this.load_model_mapper[this.quotation.shipment_type]].push(new QuotationLoad());
+    this.quotation[this.load_model_mapper[this.quotation.shipment_type]].push(new QuoteLoad());
   }
 
   loadTypeChanged(event) {
@@ -104,16 +90,11 @@ export class QuotationComponent implements OnInit {
         delete this.quotation[this.load_model_mapper[load_model]];
       }
     }
-    console.log(this.quotation);
-  }
-
-  changeStep(next_step_number: number) {
-    this.active_step = next_step_number;
   }
 
   getQuote() {
     if (!this.userMetaService.logged_in) {
-      this.modalTrigger.nativeElement.click();
+      this.modal_activated = true;
     }
   }
 
@@ -121,16 +102,54 @@ export class QuotationComponent implements OnInit {
   loginAndSend() {
     this.userMetaService.login(this.temp_user.email, this.temp_user.password)
       .then((user: any) => {
-        console.log('user');
-        console.log(user);
+        if (user) {
+          this.quotation['customer_name'] = this.userMetaService.getCustomerReference();
+          this.sendQuotation();
+        } else {
+          this.showAlert('Incorrect email/password', 'error', false);
+        }
+      })
+      .catch(() => {
+        this.showAlert('Please fill all the required contact details', 'error', false);
       });
   }
 
   guestSend() {
-    this.quotation['is_guest'] = true;
+    if (this.quotation.guest_detail && this.quotation.guest_detail.name && this.quotation.guest_detail.email && this.quotation.guest_detail.contact_number) {
+      this.quotation['is_guest'] = true;
+      this.sendQuotation();
+    } else {
+      this.showAlert('Please fill all the required contact details', 'error', false);
+    }
+  }
+
+  sendQuotation() {
     this.quotationService.sendQuotationRequest(this.quotation)
       .then((data: any) => {
-        alert('Your quote request has been sent Successfully ! We will get back to you soon');
+        this.quotation = new Quotation();
+        this.showAlert('Your Quote Request has been sent successfully! We will get back to you soon');
+      })
+      .catch((error: any) => {
+        console.log(error);
+        if (error && error[0]) {
+          this.showAlert(error[0].field_description + ' Missing Field', 'error');
+        } else {
+          this.showAlert('Sorry ! We are having trouble sending quotation right now.', 'error');
+        }
       });
+  }
+
+  showAlert(message: string, alert_type = 'success', close_modal = true) {
+    if (close_modal) {
+      this.modal_activated = false;
+    }
+    this.alert = {
+      show_alert: true,
+      message: message,
+      alert_type: alert_type
+    };
+    setTimeout(() => {
+      this.alert.show_alert = false;
+    }, 5000);
   }
 }
