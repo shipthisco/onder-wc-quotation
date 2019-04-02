@@ -6,14 +6,30 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .element-container {
+      padding: 30px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .element-container {
+        padding: 5px !important;
+      }
+    }
+  </style>
   <script src="./quotation-element.js"></script>
 </head>
 <body>
 
 <div>
   <h3>Your website</h3>
-  <div style="padding: 30px">
-    <quotation-element organisation_id="demo_me" api_endpoint="https://api.shipthis.co/"></quotation-element>
+  <div class="element-container">
+    <quotation-element organisation_id="demo_me" organisation_title="ShipThis Demo" api_endpoint="https://api.shipthis.co/"></quotation-element>
   </div>
 </div>
 

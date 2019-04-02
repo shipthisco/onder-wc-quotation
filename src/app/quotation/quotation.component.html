@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="q-card-body">
-      <div class="columns is-mobile is-desktop is-multiline">
+      <div class="columns is-desktop is-multiline">
         <div class="column is-6">
           <div class="field">
             <label class="label">What type of shipment are you shipping? *</label>
@@ -34,7 +34,7 @@
         <div class="column is-4">
 
 
-          <div class="field radio-field">
+          <div class="field">
 
             <label>Calculate by</label>
             <input class="is-checkradio" id="exampleRadioInline1" type="radio" name="same" value="cbm"
@@ -45,13 +45,19 @@
             <label for="exampleRadioInline2">LWH</label>
           </div>
 
-        </div>
 
+          <!--          <div class="field">-->
+          <!--            <input class="is-checkradio" id="exampleRadioInline1" type="radio" name="exampleRadioInline" checked="checked">-->
+          <!--            <label for="exampleRadioInline1">Option 1</label>-->
+          <!--            <input class="is-checkradio" id="exampleRadioInline2" type="radio" name="exampleRadioInline">-->
+          <!--            <label for="exampleRadioInline2">Option 2</label>-->
+          <!--          </div>-->
+        </div>
 
 
       </div>
 
-      <div class="columns is-mobile is-desktop is-multiline">
+      <div class="columns is-desktop is-multiline">
         <div class="column is-12">
           <quotation-load [(loads)]="quotation.fcls" [quotation]="quotation"></quotation-load>
           <quotation-load [(loads)]="quotation.lcls" [quotation]="quotation"></quotation-load>
@@ -197,16 +203,12 @@
   <div class="modal-background"></div>
   <div class="modal-card">
     <div class="q-card">
-      <div class="q-card-header">
-        <div class="q-header-step-number">Submit</div>
-        <div class="q-header-step-content"></div>
-      </div>
       <div class="q-card-body">
-        <div class="columns is-mobile is-desktop is-multiline">
+        <div class="columns is-desktop is-multiline">
           <div class="column is-12 account-radio">
             <div class="field radio-field">
-              <label>Do you have account
-                with {{userMetaService.organisation_id | uppercase}}</label>
+              <label class="modal-title">Do you have account
+                with {{organisation_title | uppercase}}</label>
               <input class="is-checkradio" id="haveaccountradio" type="radio" name="have_account" value="yes"
                      [(ngModel)]="has_account">
               <label for="haveaccountradio">Yes, I have account</label>
@@ -220,7 +222,7 @@
         </div>
         <div *ngIf="has_account === 'yes'">
 
-          <div class="columns is-centered is-mobile is-desktop is-multiline user-form">
+          <div class="columns is-centered  is-desktop is-multiline user-form">
 
             <div class="column is-6 label">
               Log in with your {{userMetaService.organisation_id | uppercase}} account
@@ -252,7 +254,7 @@
         </div>
 
         <div *ngIf="has_account === 'no'">
-          <div class="columns is-desktop is-centered is-mobile is-multiline">
+          <div class="columns is-desktop is-centered  is-multiline">
             <div class="column is-6 label">
               A few contact details, and we will get back to you
             </div>
@@ -294,14 +296,6 @@
             </div>
 
             <div class="column is-6">
-              <div class="field">
-                <input id="registerme" type="checkbox" class="switch is-rtl is-rounded is-outlined"
-                       [(ngModel)]="quotation.register_guest">
-                <label for="registerme" class="label">Register for next time?</label>
-              </div>
-            </div>
-
-            <div class="column is-6">
               <button class="button is-primary" (click)="guestSend()">
                 Get Quote
               </button>
@@ -315,7 +309,7 @@
       </div>
     </div>
   </div>
-  <button class="modal-close is-large" aria-label="close" (click)="modal_activated = false"></button>
+  <button class="modal-close is-small" aria-label="close" (click)="modal_activated = false"></button>
 </div>
 
 

@@ -5,9 +5,17 @@
     padding-top: 10px;
   }
 }
+
 .delete-button {
   padding: 30px 10px 0 !important;
+
+  button {
+    border: none;
+    padding: 5px 10px;
+  }
+
 }
+
 .addon-select {
   padding-left: 2rem !important;
   padding-right: 2rem !important;

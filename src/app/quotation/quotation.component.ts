@@ -16,6 +16,7 @@ export class QuotationComponent implements OnInit {
 
   @Input() organisation_id;
   @Input() api_endpoint;
+  @Input() organisation_title;
   @ViewChild('modalTrigger') modalTrigger: ElementRef;
   alert = {show_alert: false, message: '', alert_type: ''};
   refrigeration_unit_items = [
@@ -116,7 +117,6 @@ export class QuotationComponent implements OnInit {
 
   guestSend() {
     if (this.quotation.guest_detail && this.quotation.guest_detail.name && this.quotation.guest_detail.email && this.quotation.guest_detail.contact_number) {
-      this.quotation['is_guest'] = true;
       this.sendQuotation();
     } else {
       this.showAlert('Please fill all the required contact details', 'error', false);

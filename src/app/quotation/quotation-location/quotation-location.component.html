@@ -1,6 +1,6 @@
-<div class="columns is-mobile is-desktop is-multiline" *ngIf="quotation.is_simplified">
+<div class="columns  is-desktop is-multiline" *ngIf="quotation.is_simplified">
 
-  <div class="column is-2">
+  <div class="column is-2 is-10-mobile">
     <div class="field">
       <label class="label">Ready Date</label>
       <div class="control">
@@ -10,10 +10,10 @@
     </div>
   </div>
 
-  <div class="column is-4">
+  <div class="column is-4 is-10-mobile">
     <location-search [(field)]="quotation.origin.location" [title]="'Origin'"></location-search>
   </div>
-  <div class="column is-5">
+  <div class="column is-5 is-10-mobile">
     <location-search [(field)]="quotation.destination.location" [title]="'Destination'"></location-search>
   </div>
 
@@ -27,7 +27,7 @@
   <!--origin-->
   <div>
     <div class="location-type-header">Origin</div>
-    <div class="columns is-mobile is-desktop is-multiline">
+    <div class="columns  is-desktop is-multiline">
       <div class="column is-3">
         <div class="field">
           <label class="label">Location Type</label>
@@ -53,7 +53,7 @@
       </div>
     </div>
 
-    <div class="columns is-mobile is-desktop">
+    <div class="columns  is-desktop">
       <div class="column is-3">
         <label class="checkbox">
           <input type="checkbox" [(ngModel)]="quotation.origin.handle_warehouse">
@@ -82,7 +82,7 @@
   <!--destination-->
   <div>
     <div class="location-type-header">Destination</div>
-    <div class="columns is-mobile is-desktop is-multiline">
+    <div class="columns  is-desktop is-multiline">
       <div class="column is-3">
         <div class="field">
           <label class="label">Location Type</label>
@@ -99,7 +99,7 @@
 
     </div>
 
-    <div class="columns is-mobile is-desktop">
+    <div class="columns  is-desktop">
       <div class="column is-3">
         <label class="checkbox">
           <input type="checkbox" [(ngModel)]="quotation.destination.handle_warehouse">

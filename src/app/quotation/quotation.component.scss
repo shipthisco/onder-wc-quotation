@@ -209,3 +209,12 @@ h3 {
 .opacity-1{
   opacity: 1 !important;
 }
+.modal-title {
+  display: block;
+  padding: 15px;
+}
+
+.modal-close::after {
+  height: 75% !important;
+  width: 2px !important;
+}
