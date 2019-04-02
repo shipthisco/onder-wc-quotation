@@ -3,9 +3,10 @@ export class QuotationLoad {
 }
 
 export class Origin {
+  location: any;
   location_type: string;
-  location: string;
-  ready_date: any;
+  pickup_date: any;
+
   handle_warehouse: boolean;
   handle_port_charges: boolean;
   handle_customs: boolean;
@@ -47,8 +48,13 @@ export class GuestDetail {
 export class QuoteLoad {
   package_type: any = {};
   container_type: any = {};
+  container_count: number;
+  is_overweight: boolean;
+  package_quantity: number;
 
+  gross_wt: number;
   cbm: any;
+
   length: any;
   width: any;
   height: any;
@@ -62,7 +68,7 @@ export class Quotation {
   is_simplified = true;
   calculate_load_by = 'lwh';
   customer: any;
-  destination: any;
+  destination: Destination = new Destination();
   fcls: Array<QuoteLoad> = [];
   lcls: Array<QuoteLoad> = [];
   details: Array<QuoteLoad> = [];

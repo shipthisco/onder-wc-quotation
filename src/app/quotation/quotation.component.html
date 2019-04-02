@@ -19,7 +19,7 @@
           <div class="field">
             <label class="label">What type of shipment are you shipping? *</label>
             <div class="control is-expanded">
-              <div class="select is-fullwidth is-small">
+              <div class="select is-fullwidth">
                 <select [(ngModel)]="quotation.shipment_type"
                         (ngModelChange)="loadTypeChanged($event)">
                   <option *ngFor="let load_type of load_types"
@@ -46,6 +46,9 @@
           </div>
 
         </div>
+
+
+
       </div>
 
       <div class="columns is-mobile is-desktop is-multiline">
@@ -58,7 +61,7 @@
         </div>
 
         <div class="column is-12">
-          <button class="button is-light is-small" (click)="addLoad()" [disabled]="!quotation.shipment_type">
+          <button class="button is-light " (click)="addLoad()" [disabled]="!quotation.shipment_type">
             + Add new Load
           </button>
         </div>
@@ -115,11 +118,11 @@
             <label class="label">Temperature</label>
             <div class="field has-addons">
               <p class="control is-expanded">
-                <input class="input is-small" type="text" [(ngModel)]="quotation.refrigeration.temperature"
+                <input class="input " type="text" [(ngModel)]="quotation.refrigeration.temperature"
                        placeholder="Temperature">
               </p>
               <p class="control">
-              <span class="select is-small">
+              <span class="select ">
                 <select class="addon-select" [(ngModel)]="quotation.refrigeration.unit">
                   <option *ngFor="let unit of refrigeration_unit_items"
                           [value]="unit.value">{{unit.viewValue}}</option>
@@ -142,11 +145,11 @@
             <label class="label">Amount</label>
             <div class="field has-addons">
               <p class="control is-expanded">
-                <input class="input is-small" type="text" [(ngModel)]="quotation.good_value.amount"
+                <input class="input " type="text" [(ngModel)]="quotation.good_value.amount"
                        placeholder="Amount">
               </p>
               <p class="control">
-              <span class="select is-small">
+              <span class="select ">
                 <select class="addon-select" [(ngModel)]="quotation.good_value.currency">
                   <option *ngFor="let currency of currencies"
                           [value]="currency.value">{{currency.viewValue}}</option>
@@ -164,7 +167,7 @@
           <div class="column is-6">
             <div class="field">
               <div class="control">
-                <input class="input is-small" type="text" [(ngModel)]="quotation.additional_details.remark"
+                <input class="input " type="text" [(ngModel)]="quotation.additional_details.remark"
                        placeholder="Remark">
               </div>
             </div>
@@ -227,7 +230,7 @@
               <div class="field">
                 <label class="label">Email *</label>
                 <div class="control">
-                  <input class="input is-small" type="email" [(ngModel)]="temp_user.email">
+                  <input class="input " type="email" [(ngModel)]="temp_user.email">
                 </div>
               </div>
             </div>
@@ -236,7 +239,7 @@
               <div class="field">
                 <label class="label">Password *</label>
                 <div class="control">
-                  <input class="input is-small" type="password" [(ngModel)]="temp_user.password">
+                  <input class="input " type="password" [(ngModel)]="temp_user.password">
                 </div>
               </div>
             </div>
@@ -257,7 +260,7 @@
               <div class="field">
                 <label class="label">Name *</label>
                 <div class="control">
-                  <input class="input is-small" type="text" [(ngModel)]="quotation.guest_detail.name">
+                  <input class="input " type="text" [(ngModel)]="quotation.guest_detail.name">
                 </div>
               </div>
             </div>
@@ -266,7 +269,7 @@
               <div class="field">
                 <label class="label">Email *</label>
                 <div class="control">
-                  <input class="input is-small" type="email" [(ngModel)]="quotation.guest_detail.email">
+                  <input class="input " type="email" [(ngModel)]="quotation.guest_detail.email">
                 </div>
               </div>
             </div>
@@ -276,7 +279,7 @@
               <div class="field">
                 <label class="label">Organisation *</label>
                 <div class="control">
-                  <input class="input is-small" type="text" [(ngModel)]="quotation.guest_detail.organisation">
+                  <input class="input " type="text" [(ngModel)]="quotation.guest_detail.organisation">
                 </div>
               </div>
             </div>
@@ -285,7 +288,7 @@
               <div class="field">
                 <label class="label">Contact Number *</label>
                 <div class="control">
-                  <input class="input is-small" type="text" [(ngModel)]="quotation.guest_detail.contact_number">
+                  <input class="input " type="text" [(ngModel)]="quotation.guest_detail.contact_number">
                 </div>
               </div>
             </div>
@@ -319,3 +322,5 @@
 <div class="q-alert " [ngClass]="{'q-alert-active': alert.show_alert, 'q-alert-error': alert.alert_type === 'error'}">
   <div [innerHTML]="alert.message"></div>
 </div>
+
+

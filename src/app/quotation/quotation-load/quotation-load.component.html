@@ -2,7 +2,7 @@
 
 
   <div class="delete-button cursor-pointer">
-    <button class="button is-small" (click)="removeLoad(i)">
+    <button class="button " (click)="removeLoad(i)">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
            version="1.1" id="Capa_1" x="0px" y="0px" width="20px" height="20px"
            viewBox="0 0 482.428 482.429" style="enable-background:new 0 0 482.428 482.429;"
@@ -42,7 +42,7 @@
     <div class="field">
       <label class="label">Container Type</label>
       <div class="control is-expanded">
-        <div class="select is-fullwidth is-small">
+        <div class="select is-fullwidth ">
           <select [(ngModel)]="load.container_type">
             <option *ngFor="let container_type of container_types"
                     [ngValue]="container_type">{{container_type.name}}</option>
@@ -56,7 +56,7 @@
     <div class="field">
       <label class="label">How many?</label>
       <div class="control">
-        <input class="input is-small" type="number" [(ngModel)]="load.container_count">
+        <input class="input " type="number" [(ngModel)]="load.container_count">
       </div>
     </div>
   </div>
@@ -65,7 +65,7 @@
     <div class="field">
       <label class="label">Package Type</label>
       <div class="control is-expanded">
-        <div class="select is-fullwidth is-small">
+        <div class="select is-fullwidth ">
           <select [(ngModel)]="load.package_type">
             <option *ngFor="let package_type of package_types"
                     [ngValue]="package_type">{{package_type.name}}</option>
@@ -79,7 +79,7 @@
     <div class="field">
       <label class="label">How many?</label>
       <div class="control">
-        <input class="input is-small" type="number" [(ngModel)]="load.package_quantity">
+        <input class="input " type="number" [(ngModel)]="load.package_quantity">
       </div>
     </div>
   </div>
@@ -89,10 +89,10 @@
     <div class="field has-addons">
 
       <p class="control is-expanded">
-        <input class="input is-small" type="number" [(ngModel)]="load.gross_weight" placeholder="Weight">
+        <input class="input " type="number" [(ngModel)]="load.gross_weight" placeholder="Weight">
       </p>
       <p class="control">
-    <span class="select is-small">
+    <span class="select ">
       <select class="addon-select" [(ngModel)]="load.weight_unit">
         <option value="kg">KG</option>
         <option value="lb">LB</option>
@@ -108,17 +108,17 @@
     <div class="field has-addons">
 
       <p class="control is-expanded">
-        <input class="input is-small" type="text" [(ngModel)]="load.length" placeholder="Length">
+        <input class="input " type="text" [(ngModel)]="load.length" placeholder="Length">
       </p>
       <p class="control is-expanded">
-        <input class="input is-small" type="text" [(ngModel)]="load.width" placeholder="Width">
+        <input class="input " type="text" [(ngModel)]="load.width" placeholder="Width">
       </p>
       <p class="control is-expanded">
-        <input class="input is-small" type="text" [(ngModel)]="load.height" placeholder="Height">
+        <input class="input " type="text" [(ngModel)]="load.height" placeholder="Height">
       </p>
 
       <p class="control">
-    <span class="select is-small">
+    <span class="select ">
       <select class="addon-select" [(ngModel)]="load.length_unit">
         <option value="cm">CM</option>
         <option value="in">IN</option>
@@ -133,10 +133,10 @@
     <div class="field has-addons">
 
       <p class="control is-expanded">
-        <input class="input is-small" type="text" [(ngModel)]="load.cbm" placeholder="CBM">
+        <input class="input " type="text" [(ngModel)]="load.cbm" placeholder="CBM">
       </p>
       <p class="control">
-    <span class="select is-small">
+    <span class="select ">
       <select class="addon-select" [(ngModel)]="load.length_unit">
         <option value="cm">CM</option>
         <option value="in">IN</option>

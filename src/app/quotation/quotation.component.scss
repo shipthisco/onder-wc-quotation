@@ -7,7 +7,7 @@
 }
 
 * {
-  font-family: sans-serif;
+  //font-family: sans-serif;
 }
 
 $primary-color: #0093f5;
@@ -121,27 +121,27 @@ h3 {
   color: #7d7d7d !important;
   white-space: pre !important;
 }
+//
+//.select.is-fullwidth select {
+//  width: 95% !important;
+//}
 
-.select.is-fullwidth select {
-  width: 95% !important;
-}
-
-.select select:not([multiple]) {
-  padding-right: 0;
-}
+//.select select:not([multiple]) {
+//  padding-right: 0;
+//}
 
 .addon-select {
   padding-left: 2rem !important;
   padding-right: 2rem !important;
 }
 
-.select:not(.is-multiple):not(.is-loading)::after, .navbar-link:not(.is-arrowless)::after {
-  //border: 2px solid transparent !important;
-  border-radius: 1px;
-  height: 0.300em !important;
-  margin-top: -0.075em !important;
-  width: 0.300em !important;
-}
+//.select:not(.is-multiple):not(.is-loading)::after, .navbar-link:not(.is-arrowless)::after {
+//  //border: 2px solid transparent !important;
+//  border-radius: 1px;
+//  height: 0.300em !important;
+//  margin-top: -0.075em !important;
+//  width: 0.300em !important;
+//}
 
 .modal-section-title {
   margin-top: 25px;
