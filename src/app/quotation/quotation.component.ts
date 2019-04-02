@@ -30,18 +30,18 @@ export class QuotationComponent implements OnInit {
 
   ];
   load_types = [
-    {viewValue: 'Full Container Load (FCL)', value: 'sea_shipment_fcl'},
-    {viewValue: 'Less than Container Load (LCL)', value: 'sea_shipment_lcl'},
-    {viewValue: 'Air Shipment', value: 'air_shipment'},
-    {viewValue: 'Less than Truck Load (LTL)', value: 'land_shipment_ltl'},
-    {viewValue: 'Full Truck Load (FTL)', value: 'land_shipment_ftl'}];
+    {viewValue: 'Full Container Load (FCL)', value: 'fcl'},
+    {viewValue: 'Less than Container Load (LCL)', value: 'lcl'},
+    {viewValue: 'Air Shipment', value: 'air'},
+    {viewValue: 'Less than Truck Load (LTL)', value: 'ltl'},
+    {viewValue: 'Full Truck Load (FTL)', value: 'ftl'}];
 
   load_model_mapper = {
-    'sea_shipment_lcl': 'lcls',
-    'sea_shipment_fcl': 'fcls',
-    'land_shipment_ltl': 'ltls',
-    'land_shipment_ftl': 'ftls',
-    'air_shipment': 'details'
+    'lcl': 'lcls',
+    'fcl': 'fcls',
+    'ltl': 'ltls',
+    'ftl': 'ftls',
+    'air': 'details'
   };
 
   quotation: Quotation = new Quotation();
