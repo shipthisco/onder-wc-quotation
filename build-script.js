@@ -10,9 +10,9 @@ const concat = require('concat');
     './dist/onder-wc-quotation/scripts.js'
   ];
 
-  await fs.ensureDir('elements');
+  await fs.ensureDir('element');
 
-  await concat(files, 'elements/quotation-element.js');
+  await concat(files, 'element/quotation-element.js');
   console.info('Elements created successfully!')
 
 })();
